@@ -1,4 +1,4 @@
-library horizontal_date_picker;
+library horizontal_center_date_picker;
 
 import 'package:flutter/material.dart';
 import 'date_item_state.dart';
