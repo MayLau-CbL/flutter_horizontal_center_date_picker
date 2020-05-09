@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:horizontal_date_picker/datepicker_controller.dart';
-import 'package:horizontal_date_picker/horizontal_date_picker.dart';
+import 'package:horizontal_center_date_picker/datepicker_controller.dart';
+import 'package:horizontal_center_date_picker/horizontal_date_picker.dart';
 
 void main() => runApp(MyApp());
 
