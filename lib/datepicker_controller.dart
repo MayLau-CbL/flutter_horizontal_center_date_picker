@@ -30,7 +30,7 @@ class DatePickerController {
   ///FIELD: basically for internal use,
   ///if no need to customize as own picker, the following should have no need to modify
   ScrollController scrollController;
-  int shift = 0;
+  double shift = 0;
 
   ///padding + width of Item
   double itemWidth = 0;
@@ -48,7 +48,7 @@ class DatePickerController {
     var diff = index - shift;
     if (isEnableAnimation) {
       scrollController.animateTo(diff * itemWidth,
-          duration: const Duration(milliseconds: 200), curve: Curves.linear);
+          duration: const Duration(milliseconds: 300), curve: Curves.linear);
     } else {
       scrollController.jumpTo(diff * itemWidth);
     }

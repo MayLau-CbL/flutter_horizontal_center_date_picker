@@ -27,18 +27,21 @@ class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
-    return Material(
-      child: Center(
-        child: HorizontalDatePickerWidget(
-          startDate: now.subtract(Duration(days: 14)),
-          endDate: now,
-          selectedDate: now,
-          widgetWidth: MediaQuery.of(context).size.width,
-          datePickerController: DatePickerController(),
-          onValueSelected: (date) {
-            print('selected = ${date.toIso8601String()}');
-          },
-        ),
+    DateTime startDate = now.subtract(Duration(days: 14));
+    DateTime endDate = now;
+    print('startDate = $startDate ; endDate = $endDate');
+    return Container(
+      color: Colors.grey,
+      alignment: Alignment.center,
+      child: HorizontalDatePickerWidget(
+        startDate: startDate,
+        endDate: endDate,
+        selectedDate: now,
+        widgetWidth: MediaQuery.of(context).size.width,
+        datePickerController: DatePickerController(),
+        onValueSelected: (date) {
+          print('selected = ${date.toIso8601String()}');
+        },
       ),
     );
   }

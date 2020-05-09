@@ -214,14 +214,17 @@ class _HorizontalDatePickerWidgetState
       DateTime startDate, DateTime endDate, DateTime selectedDate) {
     int maxRowChild = 0;
     int shift = 0;
+    double shiftPos;
     double widgetWidth = ttlWidth;
 
     maxRowChild = (widgetWidth / width).floor();
 
     if (maxRowChild.isOdd) {
       shift = ((maxRowChild - 1) / 2).floor();
+      shiftPos = shift.toDouble();
     } else {
       shift = (maxRowChild / 2).floor();
+      shiftPos = shift - 0.5;
     }
 
     //calc padding(L+R)
@@ -230,7 +233,7 @@ class _HorizontalDatePickerWidgetState
     _itemCount = shift * 2 + endDate.difference(startDate).inDays + 1;
 
     controller.scrollController = _scrollController;
-    controller.shift = shift;
+    controller.shift = shiftPos;
     controller.itemWidth = _padding + width;
 
     controller.realStartDate = startDate.subtract(Duration(days: shift));
