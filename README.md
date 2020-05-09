@@ -1,4 +1,6 @@
-# horizontal_date_picker
+# horizontal_center_date_picker
+
+[![pub package](https://img.shields.io/pub/v/horizontal_center_date_picker.svg)](https://pub.dev/packages/horizontal_center_date_picker)
 
 A flutter widget provides a horizontal date picker and always aligns selected date in center of the widget.
 

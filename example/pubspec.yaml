@@ -19,7 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  horizontal_date_picker:
+  horizontal_center_date_picker:
     path: ../
 
 

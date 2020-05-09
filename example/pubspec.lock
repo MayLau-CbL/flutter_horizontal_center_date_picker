@@ -74,13 +74,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  horizontal_date_picker:
+  horizontal_center_date_picker:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.0+1"
   image:
     dependency: transitive
     description:
