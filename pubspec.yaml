@@ -2,7 +2,7 @@ name: horizontal_center_date_picker
 description: A flutter widget provides a horizontal date picker and always aligns selected date in center.
 version: 1.0.0+1
 author: May Lau<may.lau.dev@gmail.com>
-homepage: https://github.com/MayLau-CbL/horizontal_date_picke
+homepage: https://github.com/MayLau-CbL/horizontal_center_date_picker
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
