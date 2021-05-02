@@ -1,3 +1,6 @@
+## [2.0.0] - 20210502
+* Update: Null Safety Support
+
 ## [1.0.0+2] - 20200509
 * Updated pubspec
 

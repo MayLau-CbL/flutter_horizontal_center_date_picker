@@ -9,11 +9,11 @@ A flutter widget provides a horizontal date picker and always aligns selected da
 This shows Widget's full customizations:
 ```
 HorizontalDatePickerWidget({
-    @required this.startDate,
-    @required this.endDate,
-    @required this.selectedDate,
-    @required this.widgetWidth,
-    @required this.datePickerController,
+    required this.startDate,
+    required this.endDate,
+    required this.selectedDate,
+    required this.widgetWidth,
+    required this.datePickerController,
     this.dateItemComponentList = const <DateItem>[
       DateItem.Month,
       DateItem.Day,
@@ -50,8 +50,8 @@ HorizontalDatePickerWidget({
 
 ```
 import 'package:flutter/material.dart';
-import 'package:horizontal_date_picker/datepicker_controller.dart';
-import 'package:horizontal_date_picker/horizontal_date_picker.dart';
+import 'package:horizontal_center_date_picker/datepicker_controller.dart';
+import 'package:horizontal_center_date_picker/horizontal_date_picker.dart';
 
 void main() => runApp(MyApp());
 
@@ -78,20 +78,26 @@ class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
-    return Center(
+    DateTime startDate = now.subtract(Duration(days: 14));
+    DateTime endDate = now.add(Duration(days: 7));
+    print('startDate = $startDate ; endDate = $endDate');
+    return Container(
+      color: Colors.grey,
+      alignment: Alignment.center,
       child: HorizontalDatePickerWidget(
-        startDate: now.subtract(Duration(days: 14)),
-        endDate: now,
+        startDate: startDate,
+        endDate: endDate,
         selectedDate: now,
         widgetWidth: MediaQuery.of(context).size.width,
         datePickerController: DatePickerController(),
         onValueSelected: (date) {
           print('selected = ${date.toIso8601String()}');
         },
-      ),      
+      ),
     );
   }
 }
+
 ```
 
 ## License

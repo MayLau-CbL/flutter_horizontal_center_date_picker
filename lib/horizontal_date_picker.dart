@@ -29,7 +29,7 @@ class HorizontalDatePickerWidget extends StatefulWidget {
   final double height;
 
   ///callback when a new date selected
-  final void Function(DateTime value) onValueSelected;
+  final void Function(DateTime value)? onValueSelected;
 
   ///controller controls the visible position of the picker
   ///this controller will share both internal and external use
@@ -72,11 +72,11 @@ class HorizontalDatePickerWidget extends StatefulWidget {
   /// Main widget part of this library.
   /// It is a horizontal date picker that always make the selected option to center.
   HorizontalDatePickerWidget({
-    @required this.startDate,
-    @required this.endDate,
-    @required this.selectedDate,
-    @required this.widgetWidth,
-    @required this.datePickerController,
+    required this.startDate,
+    required this.endDate,
+    required this.selectedDate,
+    required this.widgetWidth,
+    required this.datePickerController,
     this.dateItemComponentList = const <DateItem>[
       DateItem.Month,
       DateItem.Day,
@@ -94,15 +94,8 @@ class HorizontalDatePickerWidget extends StatefulWidget {
     this.monthFontSize = 12,
     this.dayFontSize = 18,
     this.weekDayFontSize = 12,
-  })  : assert(startDate != null, 'startDate cannot be null'),
-        assert(endDate != null, 'endDate cannot be null'),
-        assert(selectedDate != null, 'selectedDate cannot be null'),
-        assert(widgetWidth != null, 'widgetWidth  cannot be null'),
-        assert(datePickerController != null,
-            'datePickerController  cannot be null'),
-        assert(
-            dateItemComponentList != null && dateItemComponentList.isNotEmpty,
-            'dateItemComponentList  cannot be null or empty');
+  }) : assert(dateItemComponentList.isNotEmpty,
+            'dateItemComponentList  cannot be empty');
 
   @override
   _HorizontalDatePickerWidgetState createState() =>
@@ -134,7 +127,7 @@ class _HorizontalDatePickerWidgetState
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       widget.datePickerController.scrollToSelectedItem();
     });
   }
@@ -149,16 +142,19 @@ class _HorizontalDatePickerWidgetState
         itemCount: _itemCount,
         controller: _scrollController,
         itemBuilder: (context, index) {
-          var dateTime = widget.datePickerController?.realStartDate
-              ?.add(Duration(days: index));
+          var dateTime = widget.datePickerController.realStartDate
+                  ?.add(Duration(days: index)) ??
+              widget.startDate;
           DateItemState dateItemState = _getDateTimeState(dateTime);
           return GestureDetector(
             onTap: () {
               if (dateItemState != DateItemState.DISABLED) {
                 widget.datePickerController.selectedDate = dateTime;
-                widget.onValueSelected(dateTime);
+                if (widget.onValueSelected != null) {
+                  widget.onValueSelected!(dateTime);
+                }
                 setState(() {
-                  widget.datePickerController?.scrollToSelectedItem();
+                  widget.datePickerController.scrollToSelectedItem();
                 });
               }
             },
@@ -186,28 +182,21 @@ class _HorizontalDatePickerWidgetState
   }
 
   DateItemState _getDateTimeState(DateTime dateTime) {
-    if (dateTime != null) {
-      if (_isSelectedDate(dateTime)) {
-        return DateItemState.SELECTED;
+    if (_isSelectedDate(dateTime)) {
+      return DateItemState.SELECTED;
+    } else {
+      if (_isWithinRange(dateTime)) {
+        return DateItemState.ACTIVE;
       } else {
-        if (_isWithinRange(dateTime)) {
-          return DateItemState.ACTIVE;
-        } else {
-          return DateItemState.DISABLED;
-        }
+        return DateItemState.DISABLED;
       }
     }
-    return DateItemState.DISABLED;
   }
 
   bool _isSelectedDate(DateTime dateTime) {
-    if (widget.datePickerController.selectedDate != null) {
-      return dateTime.year == widget.datePickerController.selectedDate.year &&
-          dateTime.month == widget.datePickerController.selectedDate.month &&
-          dateTime.day == widget.datePickerController.selectedDate.day;
-    } else {
-      return false;
-    }
+    return dateTime.year == widget.datePickerController.selectedDate?.year &&
+        dateTime.month == widget.datePickerController.selectedDate?.month &&
+        dateTime.day == widget.datePickerController.selectedDate?.day;
   }
 
   void _init(DatePickerController controller, double ttlWidth, double width,

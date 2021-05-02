@@ -28,7 +28,7 @@ class _TestPageState extends State<TestPage> {
   Widget build(BuildContext context) {
     var now = DateTime.now();
     DateTime startDate = now.subtract(Duration(days: 14));
-    DateTime endDate = now;
+    DateTime endDate = now.add(Duration(days: 7));
     print('startDate = $startDate ; endDate = $endDate');
     return Container(
       color: Colors.grey,

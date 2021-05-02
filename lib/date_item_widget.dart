@@ -17,24 +17,24 @@ class DateItemWidget extends StatelessWidget {
   final double width;
   final double height;
 
-  final double monthFontSize;
-  final double dayFontSize;
-  final double weekDayFontSize;
-  final Color normalColor;
-  final Color selectedColor;
-  final Color disabledColor;
-  final Color normalTextColor;
-  final Color selectedTextColor;
-  final Color disabledTextColor;
+  final double? monthFontSize;
+  final double? dayFontSize;
+  final double? weekDayFontSize;
+  final Color? normalColor;
+  final Color? selectedColor;
+  final Color? disabledColor;
+  final Color? normalTextColor;
+  final Color? selectedTextColor;
+  final Color? disabledTextColor;
 
   final List<DateItem> dateItemComponentList;
 
   DateItemWidget({
-    @required this.dateTime,
-    @required this.dateItemState,
-    @required this.width,
-    @required this.height,
-    @required this.dateItemComponentList,
+    required this.dateTime,
+    required this.dateItemState,
+    required this.width,
+    required this.height,
+    required this.dateItemComponentList,
     this.padding = 0.0,
     this.normalColor,
     this.selectedColor,
@@ -45,19 +45,11 @@ class DateItemWidget extends StatelessWidget {
     this.monthFontSize,
     this.dayFontSize,
     this.weekDayFontSize,
-  })  : assert(width != null, 'width cannot be null'),
-        assert(height != null, 'height cannot be null'),
-        assert(padding != null, 'padding cannot be null'),
-        assert(
-            dateItemComponentList != null && dateItemComponentList.isNotEmpty,
-            'dateItemComponentList cannot be null or empty');
+  }) : assert(dateItemComponentList.isNotEmpty,
+            'dateItemComponentList cannot be empty');
 
   @override
   Widget build(BuildContext context) {
-    if (this.dateTime == null) {
-      return Container();
-    }
-
     return Card(
       margin: EdgeInsets.all(0),
       child: Container(
@@ -102,7 +94,7 @@ class DateItemWidget extends StatelessWidget {
     );
   }
 
-  Color _getContainerColorByState(DateItemState state) {
+  Color? _getContainerColorByState(DateItemState state) {
     switch (state) {
       case DateItemState.ACTIVE:
         return normalColor;
@@ -113,7 +105,7 @@ class DateItemWidget extends StatelessWidget {
     }
   }
 
-  Color _getTextColorByState(DateItemState state) {
+  Color? _getTextColorByState(DateItemState state) {
     switch (state) {
       case DateItemState.ACTIVE:
         return normalTextColor;
