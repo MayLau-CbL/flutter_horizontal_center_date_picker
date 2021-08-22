@@ -69,6 +69,8 @@ class HorizontalDatePickerWidget extends StatefulWidget {
   ///at least one info must be in the list
   final List<DateItem> dateItemComponentList;
 
+  final String locale;
+
   /// Main widget part of this library.
   /// It is a horizontal date picker that always make the selected option to center.
   HorizontalDatePickerWidget({
@@ -94,6 +96,7 @@ class HorizontalDatePickerWidget extends StatefulWidget {
     this.monthFontSize = 12,
     this.dayFontSize = 18,
     this.weekDayFontSize = 12,
+    required this.locale,
   }) : assert(dateItemComponentList.isNotEmpty,
             'dateItemComponentList  cannot be empty');
 
@@ -159,6 +162,7 @@ class _HorizontalDatePickerWidgetState
               }
             },
             child: DateItemWidget(
+              locale: widget.locale ?? Intl.systemLocale,
               dateTime: dateTime,
               padding: _padding,
               width: widget.width,

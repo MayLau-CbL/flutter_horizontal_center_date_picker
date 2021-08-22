@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'date_item_state.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'date_item.dart';
 
@@ -29,12 +30,17 @@ class DateItemWidget extends StatelessWidget {
 
   final List<DateItem> dateItemComponentList;
 
+  // locale String like "de"
+  // https://api.flutter.dev/flutter/date_symbol_data_http_request/availableLocalesForDateFormatting.html
+  final String? locale;
+
   DateItemWidget({
     required this.dateTime,
     required this.dateItemState,
     required this.width,
     required this.height,
     required this.dateItemComponentList,
+    required this.locale,
     this.padding = 0.0,
     this.normalColor,
     this.selectedColor,
@@ -50,6 +56,7 @@ class DateItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting(this.locale, null);
     return Card(
       margin: EdgeInsets.all(0),
       child: Container(
@@ -64,7 +71,9 @@ class DateItemWidget extends StatelessWidget {
               List<Widget>.generate(this.dateItemComponentList.length, (index) {
             switch (this.dateItemComponentList[index]) {
               case DateItem.WeekDay:
-                return Text(DateFormat.E().format(this.dateTime),
+                return Text(
+                    DateFormat.E(Locale(this.locale).toString())
+                        .format(this.dateTime),
                     style: TextStyle(
                         color: _getTextColorByState(dateItemState),
                         fontSize: this.weekDayFontSize,
