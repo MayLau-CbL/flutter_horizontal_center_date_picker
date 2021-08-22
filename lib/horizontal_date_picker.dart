@@ -162,7 +162,7 @@ class _HorizontalDatePickerWidgetState
               }
             },
             child: DateItemWidget(
-              locale: widget.locale,
+              locale: widget.locale ?? Intl.systemLocale,
               dateTime: dateTime,
               padding: _padding,
               width: widget.width,
