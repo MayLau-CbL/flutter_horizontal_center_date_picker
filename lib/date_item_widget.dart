@@ -11,6 +11,8 @@ class DateItemWidget extends StatelessWidget {
   ///State of the date
   final DateItemState dateItemState;
 
+  final String locale;
+
   ///padding of the item widget
   final double padding;
 
@@ -35,6 +37,7 @@ class DateItemWidget extends StatelessWidget {
     required this.width,
     required this.height,
     required this.dateItemComponentList,
+    required this.locale,
     this.padding = 0.0,
     this.normalColor,
     this.selectedColor,
@@ -64,7 +67,7 @@ class DateItemWidget extends StatelessWidget {
               List<Widget>.generate(this.dateItemComponentList.length, (index) {
             switch (this.dateItemComponentList[index]) {
               case DateItem.WeekDay:
-                return Text(DateFormat.E().format(this.dateTime),
+                return Text(DateFormat.E(this.locale).format(this.dateTime),
                     style: TextStyle(
                         color: _getTextColorByState(dateItemState),
                         fontSize: this.weekDayFontSize,
@@ -79,7 +82,7 @@ class DateItemWidget extends StatelessWidget {
                 );
               case DateItem.Month:
                 return Text(
-                  DateFormat.MMM().format(this.dateTime),
+                  DateFormat.MMM(this.locale).format(this.dateTime),
                   style: TextStyle(
                       color: _getTextColorByState(dateItemState),
                       fontSize: this.monthFontSize,
