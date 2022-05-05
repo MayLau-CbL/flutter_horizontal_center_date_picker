@@ -1,4 +1,3 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 ///controller for scrolling the [HorizontalDatePickerWidget]
