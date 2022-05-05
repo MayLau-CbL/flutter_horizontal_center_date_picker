@@ -1,6 +1,8 @@
 library horizontal_center_date_picker;
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'date_item_state.dart';
 import 'date_item_widget.dart';
 import 'datepicker_controller.dart';
@@ -16,6 +18,8 @@ class HorizontalDatePickerWidget extends StatefulWidget {
 
   ///default selected date
   final DateTime selectedDate;
+
+  final String locale;
 
   ///each date item width
   ///if the width is not able to fill the widget's width,
@@ -82,6 +86,7 @@ class HorizontalDatePickerWidget extends StatefulWidget {
       DateItem.Day,
       DateItem.WeekDay
     ],
+    String? locale,
     this.width = 60,
     this.height = 80,
     this.onValueSelected,
@@ -94,8 +99,9 @@ class HorizontalDatePickerWidget extends StatefulWidget {
     this.monthFontSize = 12,
     this.dayFontSize = 18,
     this.weekDayFontSize = 12,
-  }) : assert(dateItemComponentList.isNotEmpty,
-            'dateItemComponentList  cannot be empty');
+  })  : assert(dateItemComponentList.isNotEmpty,
+            'dateItemComponentList  cannot be empty'),
+        this.locale = locale ?? Intl.systemLocale;
 
   @override
   _HorizontalDatePickerWidgetState createState() =>
@@ -127,6 +133,7 @@ class _HorizontalDatePickerWidgetState
   @override
   void initState() {
     super.initState();
+    initializeDateFormatting(widget.locale, null);
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       widget.datePickerController.scrollToSelectedItem();
     });
@@ -146,6 +153,7 @@ class _HorizontalDatePickerWidgetState
                   ?.add(Duration(days: index)) ??
               widget.startDate;
           DateItemState dateItemState = _getDateTimeState(dateTime);
+
           return GestureDetector(
             onTap: () {
               if (dateItemState != DateItemState.DISABLED) {
@@ -159,6 +167,7 @@ class _HorizontalDatePickerWidgetState
               }
             },
             child: DateItemWidget(
+              locale: widget.locale,
               dateTime: dateTime,
               padding: _padding,
               width: widget.width,
