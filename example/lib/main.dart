@@ -24,6 +24,8 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
+  DatePickerController _datePickerController = DatePickerController();
+
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
@@ -34,11 +36,12 @@ class _TestPageState extends State<TestPage> {
       color: Colors.grey,
       alignment: Alignment.center,
       child: HorizontalDatePickerWidget(
+        locale: 'ja_JP',
         startDate: startDate,
         endDate: endDate,
         selectedDate: now,
         widgetWidth: MediaQuery.of(context).size.width,
-        datePickerController: DatePickerController(),
+        datePickerController: _datePickerController,
         onValueSelected: (date) {
           print('selected = ${date.toIso8601String()}');
         },
