@@ -19,6 +19,7 @@ HorizontalDatePickerWidget({
       DateItem.Day,
       DateItem.WeekDay
     ],
+    String? locale,
     this.width = 60,
     this.height = 80,
     this.onValueSelected,
@@ -39,10 +40,11 @@ HorizontalDatePickerWidget({
 3. widgetWidth is the whole widget width
 4. width and height is the size of each date option item widget.
 5. dateItemComponentList is to indicate the date item label to show and the sequence of each label from top to bottom.
-6. onValueSelected is the callback function when user selected a new date.
-7. normalColor, selectedColor and disabledColor are the background color of each date option item widget background.
-8. normalTextColor, selectedTextColor and disabledTextColor are the background color of each date option item widget font color.
-9. monthFontSize, dayFontSize and weekDayFontSize are the fontsize of the date item label.
+6. locale is the available locale for date formatting. It allows null for using the system default one. Information can be found on https://api.flutter.dev/flutter/date_symbol_data_http_request/availableLocalesForDateFormatting.html 
+7. onValueSelected is the callback function when user selected a new date.
+8. normalColor, selectedColor and disabledColor are the background color of each date option item widget background.
+9. normalTextColor, selectedTextColor and disabledTextColor are the background color of each date option item widget font color.
+10. monthFontSize, dayFontSize and weekDayFontSize are the fontsize of the date item label.
 
 ## Example
 
@@ -75,6 +77,8 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
+  DatePickerController _datePickerController = DatePickerController();
+
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
@@ -85,11 +89,12 @@ class _TestPageState extends State<TestPage> {
       color: Colors.grey,
       alignment: Alignment.center,
       child: HorizontalDatePickerWidget(
+        locale: 'ja_JP',
         startDate: startDate,
         endDate: endDate,
         selectedDate: now,
         widgetWidth: MediaQuery.of(context).size.width,
-        datePickerController: DatePickerController(),
+        datePickerController: _datePickerController,
         onValueSelected: (date) {
           print('selected = ${date.toIso8601String()}');
         },

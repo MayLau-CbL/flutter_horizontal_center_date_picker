@@ -86,6 +86,11 @@ class HorizontalDatePickerWidget extends StatefulWidget {
       DateItem.Day,
       DateItem.WeekDay
     ],
+
+    /// if null, the locale will use the system default one
+    /// locale String like "de", can be found via
+    /// https://api.flutter.dev/flutter/date_symbol_data_http_request/availableLocalesForDateFormatting.html
+    /// or use locale.toString()
     String? locale,
     this.width = 60,
     this.height = 80,
