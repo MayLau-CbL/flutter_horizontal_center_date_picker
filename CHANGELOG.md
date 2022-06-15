@@ -1,3 +1,7 @@
+## [2.1.1] - 20220615
+* Update: IOS support to 9.0
+* Fix: WidgetBinding.instance null check
+
 ## [2.1.0] - 20220505
 * Update: locale support for month and week of day
 * Update: example project
