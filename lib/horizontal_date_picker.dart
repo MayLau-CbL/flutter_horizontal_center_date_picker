@@ -139,7 +139,7 @@ class _HorizontalDatePickerWidgetState
   void initState() {
     super.initState();
     initializeDateFormatting(widget.locale, null);
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.datePickerController.scrollToSelectedItem();
     });
   }
